@@ -3,10 +3,10 @@
 [View Project](https://github.com/facebook/create-react-app)
 
 ## Overview
-The project allows you to select different phantoms to view.
-These have been generated using Stable Diffusion and the depth maps were made using MiDaS.
-You can choose whether the parallax effect applied to the phantom is based upon the position of the mouse or rotation of the camera.
-You can also adjust the intensty of the effect.
+The project allows you to select different phantoms to view.  
+These have been generated using Stable Diffusion and the depth maps were made using MiDaS.  
+You can choose whether the parallax effect applied to the phantom is based upon the position of the mouse or rotation of the camera.  
+You can also adjust the intensty of the effect.  
 Or hit the rantom buttom and everything will be randomly picked for you.
 
 ## Technologies
