@@ -41,7 +41,7 @@ const Interface = ({ devMode, images, selectedImage, setSelectedImage, threeD, s
         setSelectedImage(randomImage);
 
         if (devMode) {
-            const randomThreeD = Math.random() > 0.5 ? 'mouse' : 'camera';
+            const randomThreeD = ['mouse', 'camera', 'auto'][Math.floor(Math.random() * 3)];
             const randomDeformValue = Math.random() * 0.3; // Ensure deformValue is between 0 and 0.3
 
             setThreeD(randomThreeD);
@@ -78,7 +78,7 @@ const Interface = ({ devMode, images, selectedImage, setSelectedImage, threeD, s
                     }
                     <button onClick={handleRandom}>rantom</button>
                 </div>
-                <p>choose a phantom <br/> auto parallax or base on mouse/camera <br/> adjust the intensity</p>
+                <p>choose a phantom <br /> auto parallax or base on mouse/camera <br /> adjust the intensity</p>
             </div>
         </div>
     );
