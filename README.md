@@ -20,6 +20,6 @@
 ## Improvements
 - In hindsight perhaps landscapes would have been a better way to fully utilise the use of depth maps rather than trying to create objects but I liked the ghost idea.  
 - I would've liked to try improving the depth maps myself as the generated ones often didn't create as much change in depth as I would've liked.  
-- The camera movement is very limited due to the geometry that the image is on being a sphere and the ghosts being very large within the image, which was something i struggled with in Stable Diffusion. A way to increase the users ability to move around without breaking the illusion would be good.
+- The camera movement is very limited due to the geometry that the image is on being a sphere and the ghosts being very large within the image, which was something I struggled with in Stable Diffusion. A way to increase the users ability to move around without breaking the illusion would be good.
 - The interface is very basic and while personally I like default inputs, I wouldn't leave them like that for client projects.  
 - Optimising the project for mobile.
