@@ -1,0 +1,38 @@
+.interface > div {
+    position: fixed;
+    z-index: 10;
+    top: -200px;
+    left: 20px;
+    padding: 20px;
+    /* background-color: lime; */
+}
+
+.interface > div > div {
+    display: flex;
+    align-items: center;
+}
+
+img {
+    margin-right: 40px;
+}
+
+select {
+    margin-right: 20px;
+}
+
+input {
+    width: 100px;
+    height: 3px;
+    margin-right: 20px;
+}
+
+button{
+    padding: 0px 8px;
+}
+
+p {
+    margin-top: 10px;
+    margin-left: 80px;
+    font-size: 12px;
+    color: white;
+}
