@@ -24,7 +24,7 @@ function App() {
     const [threeD, setThreeD] = useState('auto');
 
     // State to hold the deform value
-    const [deformValue, setDeformValue] = useState(0.1);
+    const [deformValue, setDeformValue] = useState(0.06);
 
     return (
         <div className={styles.app}>
