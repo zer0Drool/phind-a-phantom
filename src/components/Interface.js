@@ -78,7 +78,7 @@ const Interface = ({ devMode, images, selectedImage, setSelectedImage, threeD, s
                     }
                     <button onClick={handleRandom}>rantom</button>
                 </div>
-                <p>choose a phantom <br/> base parallax on mouse or camera <br/> adjust the intensity</p>
+                <p>choose a phantom <br/> auto parallax or base on mouse/camera <br/> adjust the intensity</p>
             </div>
         </div>
     );
