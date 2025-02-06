@@ -21,7 +21,7 @@ function App() {
     const [selectedImage, setSelectedImage] = useState(images[2]);
 
     // State to hold the 3D mode (either 'mouse' or 'camera')
-    const [threeD, setThreeD] = useState('mouse');
+    const [threeD, setThreeD] = useState('auto');
 
     // State to hold the deform value
     const [deformValue, setDeformValue] = useState(0.1);

@@ -1,6 +1,6 @@
 # Phind a Phantom
 
-[View Project](https://github.com/facebook/create-react-app)
+[View Project](https://master.d1nd5t5z124ma2.amplifyapp.com/)
 
 ## Overview
 - The project allows you to select different phantoms to view.  
@@ -20,5 +20,4 @@
 ## Improvements
 - In hindsight perhaps landscapes would have been a better way to fully utilise the use of depth maps rather than trying to create objects but I liked the ghost idea.  
 - I would've liked to try improving the depth maps myself as the generated ones often didn't create as much change in depth as I would've liked.  
-- Rather than linking the parallax movement to the mouse or camera it might be interesting to animate it so that the ghosts appear to be moving/floating on their own.  
 - The interface is very basic and while personally I like default inputs, I wouldn't leave them like that for client projects.  

@@ -69,6 +69,7 @@ const Interface = ({ devMode, images, selectedImage, setSelectedImage, threeD, s
                     {devMode &&
                         <>
                             <select name="images" id="images" value={threeD} onChange={handleThreeDChange}>
+                                <option value="auto">auto</option>
                                 <option value="mouse">mouse</option>
                                 <option value="camera">camera</option>
                             </select>

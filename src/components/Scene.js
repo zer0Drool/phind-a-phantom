@@ -15,7 +15,11 @@ const Image = ({ selectedImage, threeD, deformValue }) => {
 
     // Update the shader material's uniform values on each frame
     useFrame((state) => {
-        if (threeD === 'mouse') {
+        if (threeD === 'auto') {
+            // Use time for deformation
+            const time = state.clock.getElapsedTime();
+            depthMaterial.current.uMouse = [Math.sin(time) * deformValue, Math.cos(time) * deformValue];
+        } else if (threeD === 'mouse') {
             // Use mouse position for deformation
             depthMaterial.current.uMouse = [state.mouse.x * deformValue, state.mouse.y * deformValue];
         } else {
