@@ -7,58 +7,74 @@ import styles from './Scene.module.css';
 
 // Component to handle the image rendering with 3D effect
 const Image = ({ selectedImage, threeD, deformValue }) => {
+    const [hovered, setHover] = useState(false);
     const depthMaterial = useRef();
 
     // Load the main texture and depth map
     const texture = useTexture(`/${selectedImage}.jpg`);
     const depthMap = useTexture(`/${selectedImage}_depth.png`);
+    const dispTexture = useTexture(`/14.jpg`);
 
     // Update the shader material's uniform values on each frame
     useFrame((state) => {
+        const time = state.clock.getElapsedTime();
         if (threeD === 'auto') {
             // Use time for deformation
-            const time = state.clock.getElapsedTime();
             depthMaterial.current.uMouse = [Math.sin(time) * deformValue, Math.cos(time) * deformValue];
+            depthMaterial.current.dispFactor = Math.sin(time * 0.5) * 0.1;
         } else if (threeD === 'mouse') {
             // Use mouse position for deformation
             depthMaterial.current.uMouse = [state.mouse.x * deformValue, state.mouse.y * deformValue];
+            depthMaterial.current.dispFactor = state.mouse.x * deformValue;
         } else {
             // Use camera rotation for deformation
             const { rotation } = state.camera;
             depthMaterial.current.uMouse = [rotation.x * deformValue, rotation.y * deformValue];
+            depthMaterial.current.dispFactor = rotation.x * deformValue;
         }
     });
 
     // Extend the shader material with custom uniforms and shaders
     extend({
         DepthMaterial: shaderMaterial(
-            { uMouse: [0, 0], uImage: null, uDepthMap: null },
+            {
+                uMouse: [0, 0],
+                uImage: null,
+                uDepthMap: null,
+                effectFactor: 0.5,
+                dispFactor: 0,
+                disp: null
+            },
             `
-          varying vec2 vUv;
-          void main() {
-            vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-            vec4 viewPosition = viewMatrix * modelPosition;
-            vec4 projectionPosition = projectionMatrix * viewPosition;
-            gl_Position = projectionPosition;
-            vUv = uv;
-          }`,
-            `
-          precision mediump float;
-      
-          uniform vec2 uMouse;
-          uniform sampler2D uImage;
-          uniform sampler2D uDepthMap;
-      
-          varying vec2 vUv;
-          
-          void main() {
-             vec4 depthDistortion = texture2D(uDepthMap, vUv);
-             float parallaxMult = depthDistortion.g;
-      
-             vec2 parallax = (uMouse) * parallaxMult;
-      
-             gl_FragColor = texture2D(uImage, (vUv + parallax));;
-          }
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+                }`,
+            `            
+                varying vec2 vUv;
+                uniform vec2 uMouse;
+                uniform vec2 uD;
+                uniform sampler2D uImage;
+                uniform sampler2D uDepthMap;
+                uniform sampler2D disp;
+                uniform float dispFactor;
+                uniform float effectFactor;
+            
+                void main() {
+                    vec2 uv = vUv;
+                    vec4 disp = texture2D(disp, uv);
+                    vec4 depthDistortion = texture2D(uDepthMap, vUv);
+                    float parallaxMult = depthDistortion.g;
+                    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y + (uMouse * parallaxMult));
+            
+                    vec2 parallax = (uMouse) * parallaxMult;
+            
+                    vec4 color = texture2D(uImage, (vUv + parallax));
+                    vec4 distortedColor = texture2D(uImage, distortedPosition);
+            
+                    gl_FragColor = distortedColor; // Apply both effects to the image
+                }
           `,
         ),
     });
@@ -71,6 +87,7 @@ const Image = ({ selectedImage, threeD, deformValue }) => {
                 ref={depthMaterial}
                 uImage={texture}
                 uDepthMap={depthMap}
+                disp={dispTexture}
                 side={THREE.BackSide}
             />
         </mesh>
